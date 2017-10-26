@@ -1,0 +1,5 @@
+{
+  "plugins": ["meteor"],
+  "extends": ["plugin:meteor/recommended"],
+  "parser": "babel-eslint"
+}
