@@ -7,6 +7,7 @@
 
   {{> hello}}
   {{> info}}
+  {{> home}}
 </body>
 
 <template name="hello">
@@ -22,4 +23,21 @@
     <li><a href="https://docs.meteor.com" target="_blank">Read the Docs</a></li>
     <li><a href="https://forums.meteor.com" target="_blank">Discussions</a></li>
   </ul>
+</template>
+
+<template name="home">
+  <input class="your-upload-class" type="file">
+
+  <table class="table table-condensed">
+    <tbody>
+    {{#each theFiles}}
+    <tr>
+      <td>{{uploadedAt}}</td><td>{{original.name}}</td><td><a
+            href="{{url}}">link</a></td><td>{{#if
+      isUploaded}}uploaded{{/if}}</td><td><button
+            id="deleteFileButton">delete</button></td>
+    </tr>
+    {{/each}}
+    </tbody>
+  </table>
 </template>

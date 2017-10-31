@@ -1,3 +1,7 @@
 node_modules/
 .idea/
 COMP-4312.iml
+default.pem
+aws.ppk
+s3-settings.js
+rootkey.csv
