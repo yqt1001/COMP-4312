@@ -35,9 +35,8 @@
     {{#each files}}
     <tr>
       <td>{{uploadedAt}}</td><td>{{original.name}}</td><td><a
-            href="{{url}}">link</a></td><td>{{#if
-      isUploaded}}uploaded{{/if}}</td><td><button
-            id="deleteFileButton">delete</button></td>
+            href="{{url}}"><img src = "download.png" class="button"/></a></td><td>{{#if
+      isUploaded}}uploaded{{/if}}</td><td><img src="delete.png" id="deleteFileButton" class="button"/></td>
     </tr>
     {{/each}}
     </tbody>
