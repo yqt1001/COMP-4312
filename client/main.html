@@ -3,42 +3,36 @@
 </head>
 
 <body>
-  <div class = "topbar"></div>
-	<div class = "bartext">Cloud Storage Solution</div>
+  <div class = "topbar">
+    <div class = "bartext">Cloud Storage Solution</div>
+  </div>
 	<div class = "ass2">CS 4312 FA Assignment 2</div>
 	<div class = "names">Joseph Cherneske, William Long, John Ta</div>
+  <div class = "sidebar">
+    {{> sidebar}}
+  </div>
 	<div class = "window">
 		{{> home}}
 	</div>
 </body>
 
-<template name="hello">
-  <button>Click Me</button>
-  <p>You've pressed the button {{counter}} times.</p>
-</template>
-
-<template name="info">
-  <h2>Learn Meteor!</h2>
-  <ul>
-    <li><a href="https://www.meteor.com/try" target="_blank">Do the Tutorial</a></li>
-    <li><a href="http://guide.meteor.com" target="_blank">Follow the Guide</a></li>
-    <li><a href="https://docs.meteor.com" target="_blank">Read the Docs</a></li>
-    <li><a href="https://forums.meteor.com" target="_blank">Discussions</a></li>
-  </ul>
-</template>
-
 <template name="home">
-  <input class="your-upload-class" type="file">
 
   <table class="table table-condensed">
     <tbody>
+      <tr>
+        <td class="dtable"></td><td class="filename">Filename</td><td class = "datetime">Date/Time</td>
+      </tr>
     {{#each files}}
     <tr>
-      <td>{{uploadedAt}}</td><td>{{original.name}}</td><td><a
-            href="{{url}}"><img src = "download.png" class="button"/></a></td><td>{{#if
-      isUploaded}}uploaded{{/if}}</td><td><img src="delete.png" id="deleteFileButton" class="button"/></td>
+      <td class="tabletrash"><a href="{{url}}">{{#if isUploaded}}<img src = "download.png" class="button"/>{{else}}<img src = "uploading.png" class = "uploading"/> Uploading... {{/if}}</a></td><td class="filename">{{original.name}}</td><td class = "datetime">{{uploadedAt}}</td><td></td><td class = "tabletrash"><img src="delete.png" id="deleteFileButton" class="button"/></td>
     </tr>
     {{/each}}
     </tbody>
   </table>
+</template>
+
+<template name="sidebar">
+  <input class="your-upload-class" type="file" id="file">
+  <label for = "file"><img src = "upload.png" class = "button"/></label>
 </template>
