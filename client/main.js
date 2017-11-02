@@ -11,6 +11,10 @@ Meteor.subscribe("storage");
 Template.home.helpers({
   files: function () {
     return storage.find();
+  },
+
+  formattedSize: function(whatSize){
+    return (whatSize/1048576).toFixed(3);
   }
 });
 
@@ -26,7 +30,6 @@ Template.sidebar.events({
   'change .your-upload-class': function(event, template) {
     var files = event.target.files;
     for (var i = 0, ln = files.length; i < ln; i++) {
-      files[i].metadata = {foo: "bar"};
       storage.insert(files[i], function (err, fileObj) {
         // Inserted new doc with ID fileObj._id, and kicked off the data upload using HTTP
         if (err) {
