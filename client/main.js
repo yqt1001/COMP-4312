@@ -20,15 +20,20 @@ Template.home.events({
     storage.remove({_id:this._id});
 
   },
+});
+
+Template.sidebar.events({
   'change .your-upload-class': function(event, template) {
     var files = event.target.files;
     for (var i = 0, ln = files.length; i < ln; i++) {
+      files[i].metadata = {foo: "bar"};
       storage.insert(files[i], function (err, fileObj) {
         // Inserted new doc with ID fileObj._id, and kicked off the data upload using HTTP
         if (err) {
           console.log('error! ' + JSON.stringify(err));
         } else {
           console.log('hurray!' + JSON.stringify(fileObj.original));
+
         }
       });
     }
