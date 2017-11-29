@@ -53,6 +53,11 @@ Template.home.events({
 
 Template.sidebar.events({
   'change .your-upload-class': function(event, template) {
+    if (!Meteor.userId()) {
+      sAlert.error('Please register', {timeout: 'none', position: 'top-left'});
+      return;
+    }
+
     var files = event.target.files;
     for (var i = 0, ln = files.length; i < ln; i++) {
       var file = new FS.File(files[i]);
