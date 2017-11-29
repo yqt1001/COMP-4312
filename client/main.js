@@ -9,11 +9,13 @@ import './main.html';
 
 Meteor.subscribe("storage");
 
+var directoryId = 0;
+
 Template.home.helpers({
   files: function () {
     return storage.find({
       'metadata.owner': Meteor.userId(),
-      'metadata.directory': 0, // TODO: set the directory _id value once thats set up to be loaded in (should be 0 by default)
+      'metadata.directory': directoryId,
     });
   },
 
@@ -25,7 +27,7 @@ Template.home.helpers({
   directories: function() {
     return directory.find({
       owner: Meteor.userId(),
-      parent: 0, // TODO: set the current directory _id value once thats set up to be loaded in (should be 0 by default)
+      parent: directoryId,
     }).fetch();
   },
 
@@ -33,13 +35,23 @@ Template.home.helpers({
   newDirectory: function() {
     directory.insert({
       owner: Meteor.userId(),
-      parent: 0, // TODO: set the current directory _id value once thats set up to be loaded in (should be 0 by default)
+      parent: directoryId,
     });
   },
 
-  // deletes a directory (should be done from a parent directory like how file deletion is done)
+  // deletes a directory (should be done from a parent directory like how file deletion is done, also must be in an event)
   deleteDirectory: function() {
     directory.remove({ _id: this._id });
+  },
+
+  // go to parent directory (must be moved to an event, but doesnt require a 'this' call)
+  goToParentDirectory: function() {
+    directoryId = directory.find({ _id: directoryId }).fetchOne().parent;
+  },
+
+  // go to clicked directory (must be moved to an event)
+  goToDirectory: function() {
+    directoryId = this._id;
   }
 });
 
@@ -63,7 +75,7 @@ Template.sidebar.events({
       var file = new FS.File(files[i]);
       file.metadata = {
         owner: Meteor.userId(),
-        directory: 0, // TODO: set the directory _id value once thats set up to be loaded in (should be 0 by default)
+        directory: directoryId,
       };
       storage.insert(file, function (err, fileObj) {
         // Inserted new doc with ID fileObj._id, and kicked off the data upload using HTTP
