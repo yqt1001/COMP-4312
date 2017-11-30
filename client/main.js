@@ -61,6 +61,13 @@ Template.home.events({
     storage.remove({_id:this._id});
 
   },
+  'click #newDirButton': function (event) {
+  	console.log("new folder!");
+  	directory.insert({
+      owner: Meteor.userId(),
+      parent: directoryId,
+    });
+  }
 });
 
 Template.sidebar.events({
