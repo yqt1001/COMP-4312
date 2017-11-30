@@ -11,7 +11,7 @@ Phase 3 - 30 Nov 17 (?)
 - [ ] Delete multiple files
 - [ ] Grouping similar files
 - [ ] Size of file - cap
-- [ ] Upload directory
+- [x] Upload directory
 
 | Person  | Task |
 | ------------- | ------------- |

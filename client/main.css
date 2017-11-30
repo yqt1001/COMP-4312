@@ -98,6 +98,7 @@ body{
 	position: relative;
 	top: 70px;
 	background-color: rgba(39, 49, 66, 0.75);
+	border-radius: 20px;
 }
 
 .uploading{
