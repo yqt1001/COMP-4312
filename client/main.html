@@ -23,11 +23,11 @@
   <table class="table table-condensed">
     <tbody>
       <tr>
-        <td class="tabletrash"><img src="folder_plus.png" id="newDirButton" class="button"/></td><td class="filename">Filename</td><td>Size</td><td class = "datetime">Date/Time</td>
+        <td class="tabletrash"><img src="folder_plus.png" id="newDirButton" class="button"/><div id='dirShow'></div></td><td class="filename">Filename</td><td>Size</td><td class = "datetime">Date/Time</td>
       </tr>
       {{#each directories}}
       <tr>
-        <td><img src="folder.png" id="folderButton" class="button"/></td><td class="filename">{{_id}}</td><td>Size</td><td class = "datetime">datetime</td><td></td><td class = "tabletrash"><img src="delete.png" id="deleteFolderButton" class="button"/></td>
+        <td><img src="folder.png" id="folderButton" class="button"/></td><td class="filename">{{name}}</td><td></td><td class = "datetime">{{datetime}}</td><td></td><td class = "tabletrash"><img src="delete.png" id="deleteFolderButton" class="button"/></td>
       </tr>
       {{/each}}
     {{#each files}}
@@ -46,9 +46,8 @@
 
 <template name="newDirName">
   <div class = "newDir">
-    <form>
-      <input type = "text" name = "dirName">
-      <input type = "submit" value = "SUBMIT">
-    </form>
+    <input type = "text" id = "dirName">
+    <button id = "subDir" class="formbutton">Create</button>
+    <button id = "cancelDir" class="formbutton">Cancel</button>
   </div>
 </template>

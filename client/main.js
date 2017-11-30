@@ -11,6 +11,8 @@ Meteor.subscribe("storage");
 
 var directoryId = 0;
 
+var dirOpen = false;
+
 Template.home.helpers({
   files: function () {
     return storage.find({
@@ -67,10 +69,10 @@ Template.home.events({
       return;
     }
   	console.log("new folder!");
-  	directory.insert({
-      owner: Meteor.userId(),
-      parent: directoryId,
-    });
+    if(!dirOpen){
+      UI.insert(UI.render(Template.newDirName), $('#dirShow').get(0));
+      dirOpen = true;
+    }
   },
   'click #deleteFolderButton': function (event){
     directory.remove({ _id: this._id });
@@ -101,5 +103,17 @@ Template.sidebar.events({
         }
       });
     }
+  }
+});
+
+Template.newDirName.events({
+  'click #subDir': function(event){
+    directory.insert({
+      owner: Meteor.userId(),
+      parent: directoryId,
+      name: $('#dirName').val(),
+      datetime: new Date()
+    });
+    $('#dirShow').html('');
   }
 });

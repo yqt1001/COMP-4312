@@ -43,6 +43,13 @@
 .filename{
 	width: 30%;
 }
+.newDirName{
+	background-color: rgba(39, 49, 66, 0.75);
+	padding: 10px;
+}
+.formbutton{
+	width: 48%;
+}
 td{
 	border-bottom: 2px solid rgba(69, 79, 96, 1);
 	border-left: 1px solid rgba(69, 79, 96, 1);
