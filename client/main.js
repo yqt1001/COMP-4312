@@ -9,15 +9,30 @@ import './main.html';
 
 Meteor.subscribe("storage");
 
-var directoryId = 0;
-
 var dirOpen = false;
 
+var directoryId = new ReactiveVar(0);
+
 Template.home.helpers({
+  getDir: function () {
+    var dirStr;
+    var curDir = directoryId.get();
+    var dirs = ["~/"];
+
+    while(curDir!=0){
+      dirs.push(directory.findOne({ _id: curDir }).name + "/");
+      console.log(curDir);
+      curDir = directory.findOne({ _id: curDir }).parent;
+    }
+    dirs.forEach(function(element){
+      dirStr += element;
+    });
+    return dirStr;
+  },
   files: function () {
     return storage.find({
       'metadata.owner': Meteor.userId(),
-      'metadata.directory': directoryId,
+      'metadata.directory': directoryId.get(),
     });
   },
 
@@ -29,7 +44,7 @@ Template.home.helpers({
   directories: function() {
     return directory.find({
       owner: Meteor.userId(),
-      parent: directoryId,
+      parent: directoryId.get(),
     }).fetch();
   },
 
@@ -37,7 +52,7 @@ Template.home.helpers({
   newDirectory: function() {
     directory.insert({
       owner: Meteor.userId(),
-      parent: directoryId,
+      parent: directoryId.get(),
     });
   },
 
@@ -48,12 +63,12 @@ Template.home.helpers({
 
   // go to parent directory (must be moved to an event, but doesnt require a 'this' call)
   goToParentDirectory: function() {
-    directoryId = directory.find({ _id: directoryId }).fetchOne().parent;
+    directoryId.set(directory.find({ _id: directoryId }).fetchOne().parent);
   },
 
   // go to clicked directory (must be moved to an event)
   goToDirectory: function() {
-    directoryId = this._id;
+    directoryId.set(this._id);
   }
 });
 
@@ -76,6 +91,13 @@ Template.home.events({
   },
   'click #deleteFolderButton': function (event){
     directory.remove({ _id: this._id });
+  },
+  'click #folderButton': function (event){
+    directoryId.set(this._id);
+    console.log("navigating to ID "+this._id);
+  },
+  'click #updir': function (event){
+     directoryId.set(directory.findOne({ _id: directoryId.get() }).parent);
   }
 });
 
@@ -91,7 +113,7 @@ Template.sidebar.events({
       var file = new FS.File(files[i]);
       file.metadata = {
         owner: Meteor.userId(),
-        directory: directoryId,
+        directory: directoryId.get(),
       };
       storage.insert(file, function (err, fileObj) {
         // Inserted new doc with ID fileObj._id, and kicked off the data upload using HTTP
@@ -110,10 +132,13 @@ Template.newDirName.events({
   'click #subDir': function(event){
     directory.insert({
       owner: Meteor.userId(),
-      parent: directoryId,
+      parent: directoryId.get(),
       name: $('#dirName').val(),
       datetime: new Date()
     });
+    $('#dirShow').html('');
+  },
+  'click #cancelDir':function(event){
     $('#dirShow').html('');
   }
 });
