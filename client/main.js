@@ -67,6 +67,9 @@ Template.home.events({
       owner: Meteor.userId(),
       parent: directoryId,
     });
+  },
+  'click #deleteFolderButton': function (event){
+    directory.remove({ _id: this._id });
   }
 });
 

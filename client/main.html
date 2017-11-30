@@ -23,8 +23,13 @@
   <table class="table table-condensed">
     <tbody>
       <tr>
-        <td class="newDir"><img src="folder_plus.png" id="newDirButton" class="button"/></td><td class="filename">Filename</td><td>Size</td><td class = "datetime">Date/Time</td>
+        <td class="tabletrash"><img src="folder_plus.png" id="newDirButton" class="button"/></td><td class="filename">Filename</td><td>Size</td><td class = "datetime">Date/Time</td>
       </tr>
+      {{#each directories}}
+      <tr>
+        <td><img src="folder.png" id="folderButton" class="button"/></td><td class="filename">{{_id}}</td><td>Size</td><td class = "datetime">datetime</td><td></td><td class = "tabletrash"><img src="delete.png" id="deleteFolderButton" class="button"/></td>
+      </tr>
+      {{/each}}
     {{#each files}}
     <tr>
       <td class="tabletrash"><a href="{{url}}">{{#if isUploaded}}<img src = "download.png" class="button"/>{{else}}<img src = "uploading.png" class = "uploading"/> Uploading... {{/if}}</a></td><td class="filename">{{original.name}}</td><td>{{formattedSize(original.size)}} MB</td><td class = "datetime">{{uploadedAt}}</td><td></td><td class = "tabletrash"><img src="delete.png" id="deleteFileButton" class="button"/></td>
@@ -37,4 +42,13 @@
 <template name="sidebar">
   <input class="your-upload-class" type="file" id="file">
   <label for = "file"><img src = "upload.png" class = "button"/></label>
+</template>
+
+<template name="newDirName">
+  <div class = "newDir">
+    <form>
+      <input type = "text" name = "dirName">
+      <input type = "submit" value = "SUBMIT">
+    </form>
+  </div>
 </template>
