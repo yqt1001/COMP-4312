@@ -7,6 +7,12 @@ Phase 3 - 30 Nov 17 (?)
 
 ## Todo
 
+- [x] User manage account
+- [ ] Delete multiple files
+- [ ] Grouping similar files
+- [ ] Size of file - cap
+- [ ] Upload directory
+
 | Person  | Task |
 | ------------- | ------------- |
 | Joseph  | Frontend Initial  |
