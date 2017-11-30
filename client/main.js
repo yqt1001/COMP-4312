@@ -62,6 +62,10 @@ Template.home.events({
 
   },
   'click #newDirButton': function (event) {
+    if (!Meteor.userId()) {
+      sAlert.error('Please register', {timeout: 'none', position: 'top-left'});
+      return;
+    }
   	console.log("new folder!");
   	directory.insert({
       owner: Meteor.userId(),
