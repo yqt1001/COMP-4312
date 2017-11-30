@@ -33,7 +33,7 @@
         <td><img src="folder.png" id="folderButton" class="button"/></td><td class="filename">{{name}}</td><td></td><td class = "datetime">{{datetime}}</td><td></td><td class = "tabletrash"><img src="delete.png" id="deleteFolderButton" class="button"/></td>
       </tr>
       {{/each}}
-    {{#each filesAlpha}}
+    {{#each files}}
     <tr>
       <td class="tabletrash"><a href="{{url}}">{{#if isUploaded}}<img src = "download.png" class="button"/>{{else}}<img src = "uploading.png" class = "uploading"/> Uploading... {{/if}}</a></td><td class="filename">{{original.name}}</td><td>{{formattedSize(original.size)}} MB</td><td class = "datetime">{{uploadedAt}}</td><td></td><td class = "tabletrash"><img src="delete.png" id="deleteFileButton" class="button"/></td>
     </tr>
