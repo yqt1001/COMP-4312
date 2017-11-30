@@ -10,6 +10,7 @@ Phase 3 - 30 Nov 17
 - [x] User manage account
 - [ ] Delete multiple files
 - [ ] Grouping similar files
+> Sort functions are there...kinda. -john-tb
 - [ ] Size of file - cap
 - [x] Upload directory
 
