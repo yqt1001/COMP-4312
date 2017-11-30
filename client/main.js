@@ -14,6 +14,14 @@ var directoryId = 0;
 var dirOpen = false;
 
 Template.home.helpers({
+	
+	filesAlpha: function () {
+    return storage.find({
+      'metadata.owner': Meteor.userId(),
+      'metadata.directory': directoryId,
+    },{sort: { 'original.name': 1 }});
+  },
+	
   files: function () {
     return storage.find({
       'metadata.owner': Meteor.userId(),
@@ -85,7 +93,6 @@ Template.sidebar.events({
       sAlert.error('Please register', {timeout: 'none', position: 'top-left'});
       return;
     }
-
     var files = event.target.files;
     for (var i = 0, ln = files.length; i < ln; i++) {
       var file = new FS.File(files[i]);

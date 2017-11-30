@@ -2,7 +2,7 @@
 A Cloud Based Storage Project, made with love <3
 <br>
 ## Next Deadline
-Phase 3 - 30 Nov 17 (?)
+Phase 3 - 30 Nov 17
 <br>
 
 ## Todo
