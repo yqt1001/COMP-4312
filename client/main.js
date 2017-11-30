@@ -15,19 +15,21 @@ var directoryId = new ReactiveVar(0);
 
 Template.home.helpers({
   getDir: function () {
-    var dirStr;
+    var dirStr = '';
     var curDir = directoryId.get();
-    var dirs = ["~/"];
+    var dirs = [''];
 
     while(curDir!=0){
       dirs.push(directory.findOne({ _id: curDir }).name + "/");
       console.log(curDir);
       curDir = directory.findOne({ _id: curDir }).parent;
     }
-    dirs.forEach(function(element){
-      dirStr += element;
+    dirs.reverse().forEach(function(element){
+      if(element!="undefined"){
+        dirStr += element;
+      }
     });
-    return dirStr;
+    return "~/" + dirStr;
   },
 	
 	filesAlpha: function () {
@@ -143,8 +145,10 @@ Template.newDirName.events({
       datetime: new Date()
     });
     $('#dirShow').html('');
+    dirOpen = false;
   },
   'click #cancelDir':function(event){
     $('#dirShow').html('');
+    dirOpen = false;
   }
 });
