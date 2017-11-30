@@ -14,6 +14,7 @@ var dirOpen = false;
 var directoryId = new ReactiveVar(0);
 
 Template.home.helpers({
+<<<<<<< HEAD
   getDir: function () {
     var dirStr;
     var curDir = directoryId.get();
@@ -29,6 +30,16 @@ Template.home.helpers({
     });
     return dirStr;
   },
+=======
+	
+	filesAlpha: function () {
+    return storage.find({
+      'metadata.owner': Meteor.userId(),
+      'metadata.directory': directoryId,
+    },{sort: { 'original.name': 1 }});
+  },
+	
+>>>>>>> 3e25fa8ed8ef3a76f683bfff606e797fa288300f
   files: function () {
     return storage.find({
       'metadata.owner': Meteor.userId(),
@@ -107,7 +118,6 @@ Template.sidebar.events({
       sAlert.error('Please register', {timeout: 'none', position: 'top-left'});
       return;
     }
-
     var files = event.target.files;
     for (var i = 0, ln = files.length; i < ln; i++) {
       var file = new FS.File(files[i]);
