@@ -2,16 +2,16 @@
 A Cloud Based Storage Project, made with love <3
 <br>
 ## Next Deadline
-Phase 3 - 30 Nov 17
+None, we done bruh!
 <br>
 
 ## Todo
 
 - [x] User manage account
-- [ ] Delete multiple files
-- [ ] Grouping similar files
+- [x] Delete multiple files
+- [x] Grouping similar files
 > Sort functions are there...kinda. -john-tb
-- [ ] Size of file - cap
+- [x] Size of file - cap
 - [x] Upload directory
 
 | Person  | Task |
